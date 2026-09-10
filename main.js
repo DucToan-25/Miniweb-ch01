@@ -218,3 +218,60 @@ window.addEventListener('resize', ()=>{
     const isMobileResize = window.innerWidth < 768;
     camera.position.z = isMobileResize ? 85 : 45;
 });
+
+// ========================================================
+// 3. CHỨC NĂNG KÉO THẢ TỰ DO (Thêm vào cuối main.js)
+// ========================================================
+function makeDraggable(element) {
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+    element.onmousedown = dragMouseDown;
+    element.ontouchstart = dragTouchStart;
+
+    function dragMouseDown(e) {
+        e.preventDefault();
+        e.stopPropagation(); // Ngăn xoay 3D
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        element.style.top = (element.offsetTop - pos2) + "px";
+        element.style.left = (element.offsetLeft - pos1) + "px";
+    }
+
+    // Xử lý kéo thả trên màn hình cảm ứng
+    function dragTouchStart(e) {
+        e.stopPropagation(); // Ngăn xoay 3D
+        pos3 = e.touches[0].clientX;
+        pos4 = e.touches[0].clientY;
+        document.ontouchend = closeDragElement;
+        document.ontouchmove = elementTouchDrag;
+    }
+
+    function elementTouchDrag(e) {
+        pos1 = pos3 - e.touches[0].clientX;
+        pos2 = pos4 - e.touches[0].clientY;
+        pos3 = e.touches[0].clientX;
+        pos4 = e.touches[0].clientY;
+        element.style.top = (element.offsetTop - pos2) + "px";
+        element.style.left = (element.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+        document.ontouchend = null;
+        document.ontouchmove = null;
+    }
+}
+
+// Kích hoạt tính năng cho tất cả các phần tử có class 'draggable'
+document.querySelectorAll('.draggable').forEach(makeDraggable);

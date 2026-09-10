@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Thu Huyền</title>
+    <title><MINIWEB-></title>
     
     <link rel="stylesheet" href="style.css">
 </head>
@@ -29,14 +29,14 @@
 
     <audio id="bg-music" src="mussic.mp3" loop></audio>
 
-    <div id="text-container">
-        <h1>Tình yêu</h1>
-        <h2>LOVE</h2>
-        <div class="image-gallery">
-        <img src="bohoa.png" alt="Ảnh kỷ niệm 1">
-        <img src="bonghong.png" alt="Ảnh kỷ niệm 2">
-    </div>
-    </div>
+<div id="text-container">
+    <h1 class="draggable" style="top: 15%; left: 20%;">Tình yêu</h1>
+    <h2 class="draggable" style="top: 30%; left: 30%;">LOVE</h2>
+    
+    <!-- Đã xóa width, chỉ giữ lại tọa độ kéo thả -->
+    <img src="bohoa.png" alt="Ảnh kỷ niệm 1" class="draggable" style="top: 50%; left: 15%;">
+    <img src="bonghong.png" alt="Ảnh kỷ niệm 2" class="draggable" style="top: 50%; left: 65%;">
+</div>
 
     <script type="importmap">
         {

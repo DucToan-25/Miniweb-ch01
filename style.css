@@ -17,10 +17,6 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
     padding: 10vh 0 15vh 0;
     z-index: 9999;
     opacity: 0;
@@ -212,4 +208,56 @@ body {
     .image-gallery img {
         width: 180px;
     }
+}
+
+/* ========================================= */
+/* HIỆU ỨNG KÉO THẢ, CHỮ VÀ ẢNH              */
+/* ========================================= */
+
+/* 1. Thiết lập kéo thả và viền sáng khi chạm */
+.draggable {
+    position: absolute;
+    cursor: grab;
+    pointer-events: auto; /* Quan trọng: Chỉ nhận click vào ảnh/chữ */
+    z-index: 10000;
+    transition: filter 0.3s ease; /* Mượt mà khi sáng lên */
+}
+
+/* Hiệu ứng khi đang nhấn giữ để kéo */
+.draggable:active {
+    cursor: grabbing;
+    filter: brightness(1.3) drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
+    transform: scale(1.05); /* Phóng to nhẹ khi cầm lên */
+}
+
+/* 2. Hiệu ứng cho Chữ (Thêm phát sáng mờ) */
+.draggable h1, .draggable h2 {
+    filter: drop-shadow(0 0 10px rgba(255, 20, 147, 0.8)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+}
+
+/* 3. Hiệu ứng cho Ảnh (Bo góc, bóng đổ và trôi lơ lửng) */
+.draggable img {
+    border-radius: 15px; /* Bo tròn góc ảnh */
+    box-shadow: 0 10px 25px rgba(255, 105, 180, 0.6); /* Bóng đổ màu hồng */
+    border: 3px solid rgba(255, 255, 255, 0.5); /* Viền trắng mờ */
+    animation: float-img 4s ease-in-out infinite; /* Trôi bồng bềnh */
+}
+
+/* Tạo chuyển động trôi lên xuống cho ảnh */
+@keyframes float-img {
+    0% { transform: translateY(0px) rotate(-2deg); }
+    50% { transform: translateY(-15px) rotate(2deg); }
+    100% { transform: translateY(0px) rotate(-2deg); }
+}
+
+/* Thiết lập cho các ảnh có thể kéo thả */
+#text-container img.draggable {
+    width: 160px;       /* Cố định chiều rộng cho mọi ảnh */
+    height: 160px;      /* Cố định chiều cao cho mọi ảnh */
+    object-fit: cover;  /* Cắt ảnh vừa khung mà không bị méo tỷ lệ */
+    border-radius: 15px; /* Bo góc ảnh cho mềm mại, đẹp mắt hơn */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Đổ bóng nhẹ cho ảnh */
+    
+    /* Tái sử dụng hiệu ứng nhịp đập giống hệt chữ */
+    animation: text-heartbeat 1.57s infinite linear; 
 }
