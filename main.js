@@ -42,24 +42,75 @@ if (currentYear) {
 
 }
 
-
 /* ================= DARK / LIGHT MODE ================= */
 
 const savedTheme =
     localStorage.getItem("theme");
 
+const prefersLight =
+    window.matchMedia("(prefers-color-scheme: light)").matches;
+
+
+/* FIRST VISIT → FOLLOW DEVICE */
 
 if (savedTheme === "light") {
 
     body.classList.add("light");
-
     themeIcon.textContent = "☀";
+
+} else if (savedTheme === "dark") {
+
+    body.classList.remove("light");
+    themeIcon.textContent = "☾";
 
 } else {
 
-    themeIcon.textContent = "☾";
+    if (prefersLight) {
+
+        body.classList.add("light");
+        themeIcon.textContent = "☀";
+
+    } else {
+
+        body.classList.remove("light");
+        themeIcon.textContent = "☾";
+
+    }
 
 }
+
+/* ================= FOLLOW SYSTEM THEME ================= */
+
+const systemThemeMedia = window.matchMedia(
+    "(prefers-color-scheme: light)"
+);
+
+systemThemeMedia.addEventListener("change", (event) => {
+
+    /* Chỉ tự đổi nếu người dùng chưa tự chọn theme */
+    if (!localStorage.getItem("theme")) {
+
+        if (event.matches) {
+
+            body.classList.add("light");
+
+            if (themeIcon) {
+                themeIcon.textContent = "☀";
+            }
+
+        } else {
+
+            body.classList.remove("light");
+
+            if (themeIcon) {
+                themeIcon.textContent = "☾";
+            }
+
+        }
+
+    }
+
+});
 
 
 /* CHANGE THEME */

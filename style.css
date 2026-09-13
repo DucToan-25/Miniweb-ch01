@@ -508,6 +508,57 @@ body.light .header {
 }
 
 
+/* GRID EFFECT */
+
+.hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            rgba(100, 150, 220, 0.04) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(100, 150, 220, 0.04) 1px,
+            transparent 1px
+        );
+
+    background-size: 70px 70px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent
+        );
+
+    pointer-events: none;
+}
+
+
+.hero-container {
+
+    display: grid;
+
+    grid-template-columns:
+        1.05fr
+        0.95fr;
+
+    gap: 70px;
+
+    align-items: center;
+
+    position: relative;
+
+    z-index: 2;
+}
+
 /* BUTTONS */
 
 .hero-buttons {
@@ -631,28 +682,18 @@ body.light .header {
 
 /* ================= HERO IMAGE ================= */
 
-.hero-image {
 
-    min-height: 500px;
-
-    display: grid;
-
-    place-items: center;
-
-    position: relative;
-}
+/* ---------- AVATAR 1: HERO ---------- */
 
 .portrait-card {
 
     width: min(380px, 85%);
-
     height: 480px;
 
-    border-radius: 35px;
-
+    position: relative;
     overflow: hidden;
 
-    position: relative;
+    border-radius: 35px;
 
     border: 1px solid
         rgba(100, 160, 255, 0.35);
@@ -668,27 +709,163 @@ body.light .header {
         0 30px 80px
         rgba(0, 0, 0, 0.45);
 
-    transform:
-        rotate(2deg);
+    /* Nghiêng nhẹ khi bình thường */
+    transform: rotate(2deg);
 
     transition:
-        transform 0.5s ease;
+        transform 0.5s ease,
+        box-shadow 0.5s ease;
 }
 
-.portrait-card:hover {
 
-    transform:
-        rotate(0deg)
-        translateY(-8px);
+/* ---------- AVATAR 2: ABOUT ---------- */
+
+.about-photo {
+
+    position: relative;
+    overflow: hidden;
+
+    border-radius: 35px;
+
+    border: 1px solid
+        rgba(100, 160, 255, 0.35);
+
+    background:
+        linear-gradient(
+            145deg,
+            #122b50,
+            #08111f
+        );
+
+    box-shadow:
+        0 30px 80px
+        rgba(0, 0, 0, 0.45);
+
+    /* Nghiêng nhẹ */
+    transform: rotate(2deg);
+
+    transition:
+        transform 0.5s ease,
+        box-shadow 0.5s ease;
 }
 
-.portrait-card img {
+
+/* =====================================================
+   VIỀN NEON
+   ===================================================== */
+
+.portrait-card::before,
+.about-photo::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -2px;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent,
+            #00d9ff,
+            #7c3aed,
+            transparent
+        );
+
+    opacity: 0;
+
+    transition:
+        opacity 0.4s ease;
+
+    z-index: 0;
+}
+
+
+/* =====================================================
+   ẢNH
+   ===================================================== */
+
+.portrait-card img,
+.about-photo img {
+
+    position: relative;
+
+    z-index: 1;
 
     width: 100%;
     height: 100%;
 
     object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform 0.5s ease,
+        filter 0.5s ease;
 }
+
+
+/* =====================================================
+   HOVER - KHUNG
+   ===================================================== */
+
+.portrait-card:hover,
+.about-photo:hover {
+
+    /*
+       Từ rotate(2deg)
+       → nghiêng sang chiều ngược lại
+       → đồng thời nâng lên
+    */
+
+    transform:
+        rotate(-2deg)
+        translateY(-10px)
+        scale(1.02);
+
+    box-shadow:
+
+        0 0 25px
+        rgba(0, 217, 255, 0.45),
+
+        0 0 60px
+        rgba(124, 58, 237, 0.35),
+
+        0 25px 70px
+        rgba(0, 0, 0, 0.35);
+}
+
+
+/* =====================================================
+   HOVER - VIỀN NEON
+   ===================================================== */
+
+.portrait-card:hover::before,
+.about-photo:hover::before {
+
+    opacity: 1;
+}
+
+
+/* =====================================================
+   HOVER - ẢNH
+   ===================================================== */
+
+.portrait-card:hover img,
+.about-photo:hover img {
+
+    transform:
+        scale(1.08);
+
+    filter:
+        brightness(1.08)
+        saturate(1.12);
+}
+
+
+/* =====================================================
+   PLACEHOLDER AVATAR HERO
+   ===================================================== */
 
 .image-placeholder {
 
@@ -710,7 +887,10 @@ body.light .header {
             #183a68,
             #07101d
         );
+
+    z-index: 0;
 }
+
 
 .image-placeholder span {
 
@@ -718,15 +898,21 @@ body.light .header {
 
     font-weight: 800;
 
-    color: rgba(255,255,255,0.9);
+    color:
+        rgba(255,255,255,0.9);
 }
+
 
 .image-placeholder small {
 
-    color: #aab7cb;
+    color:
+        #aab7cb;
 
     font-size: 13px;
 }
+
+
+/* Nếu có ảnh thì ẩn placeholder */
 
 .portrait-card:not(.no-image)
 .image-placeholder {
@@ -734,6 +920,27 @@ body.light .header {
     display: none;
 }
 
+
+/* =====================================================
+   GLOW PHÍA SAU AVATAR
+   ===================================================== */
+
+.image-glow {
+
+    position: absolute;
+
+    width: 320px;
+    height: 320px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(79, 140, 255, 0.3),
+            transparent 70%
+        );
+
+    filter: blur(30px);
+}
 
 /* GLOW */
 
@@ -975,20 +1182,23 @@ body.light .header {
 }
 
 
-/* BADGE */
+/* ================= EXPERIENCE BADGE ================= */
 
-.experience-badge {
-
+.experience-badge-float {
     position: absolute;
-
     right: -25px;
-
     bottom: 30px;
 
+    animation: experienceBadgeFloat 3.5s ease-in-out infinite;
+    will-change: transform;
+}
+
+
+/* BOX */
+
+.experience-badge {
     display: flex;
-
     align-items: center;
-
     gap: 12px;
 
     padding: 15px 18px;
@@ -1002,20 +1212,40 @@ body.light .header {
     box-shadow: var(--shadow);
 }
 
+
+/* IT */
+
 .experience-badge strong {
-
     font-size: 24px;
-
     color: var(--primary);
 }
 
+
+/* STUDENT / DEVELOPER */
+
 .experience-badge span {
-
     font-size: 10px;
-
     line-height: 1.4;
-
     color: var(--text-secondary);
+}
+
+
+/* ================= FLOAT ================= */
+
+@keyframes experienceBadgeFloat {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
 }
 
 
@@ -1314,7 +1544,13 @@ body.light .header {
     transition: var(--transition);
 }
 
-.project-card:hover
+.project-card{
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 .project-overlay {
 
     opacity: 1;
@@ -2043,15 +2279,39 @@ body.light .header {
 ========================= */
 
 .status-page {
+    position: relative;
     min-height: 100vh;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     padding: 40px 20px;
-    background:
-        radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.18), transparent 35%),
-        radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.16), transparent 35%),
-        var(--bg);
+
+    background-image: url("project-nen.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Lớp làm mờ ảnh */
+.status-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: rgba(5, 8, 25, 0.45);
+
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+
+    z-index: 0;
+}
+
+/* Đưa nội dung lên trên lớp ảnh */
+.status-container {
+    position: relative;
+    z-index: 1;
 }
 
 .status-container {
@@ -2189,4 +2449,95 @@ body.light .header {
 
 .home-link:hover {
     opacity: 1;
+}
+
+/* Màu logo mạng xã hội */
+.social-links a:nth-child(1) i {
+    color: #ffffff; /* GitHub */
+}
+
+.light .social-links a:nth-child(1) i {
+    color: #181717;
+}
+
+.social-links a:nth-child(2) i {
+    color: #1877f2; /* Facebook */
+}
+
+.social-links a:nth-child(3) i {
+    color: #ff0000; /* YouTube */
+}
+
+.social-links a:nth-child(4) i {
+    color: #ea4335; /* Email */
+}
+.social-links a:nth-child(1):hover {
+    border-color: #ffffff;
+    box-shadow: 0 0 15px rgba(255,255,255,0.35);
+}
+
+.social-links a:nth-child(2):hover {
+    border-color: #1877f2;
+    box-shadow: 0 0 15px rgba(24,119,242,0.4);
+}
+
+.social-links a:nth-child(3):hover {
+    border-color: #ff0000;
+    box-shadow: 0 0 15px rgba(255,0,0,0.4);
+}
+
+.social-links a:nth-child(4):hover {
+    border-color: #ea4335;
+    box-shadow: 0 0 15px rgba(234,67,53,0.4);
+}
+
+/* Floating cards - Light mode */
+.light .floating-card {
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: #18181b;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.light .floating-card strong {
+    color: #18181b;
+}
+
+.light .floating-card small {
+    color: #666;
+}
+
+.logo img {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+.footer-logo strong {
+    font-size: 20px;
+    font-weight: 800;
+
+    background: linear-gradient(
+        90deg,
+        #00d9ff,
+        #7c3aed,
+        #00d9ff
+    );
+
+    background-size: 200% auto;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: logoTextGlow 4s linear infinite;
+
+    transition: 0.3s ease;
+}
+
+.footer-logo strong:hover {
+    filter: drop-shadow(0 0 8px rgba(0, 217, 255, 0.7));
+    transform: translateY(-1px);
 }

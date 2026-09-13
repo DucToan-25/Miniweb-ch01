@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Liên hệ | Đức Toàn</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 25px;
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(99, 102, 241, 0.25),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 80% 80%,
+                    rgba(168, 85, 247, 0.22),
+                    transparent 35%
+                ),
+                #080b16;
+
+            color: white;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 560px;
+
+            padding: 45px 40px;
+
+            text-align: center;
+
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 28px;
+
+            background: rgba(255,255,255,0.06);
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.45);
+        }
+
+        .icon {
+            width: 80px;
+            height: 80px;
+
+            margin: 0 auto 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 36px;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(99,102,241,0.25),
+                    rgba(168,85,247,0.25)
+                );
+
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .label {
+            margin-bottom: 10px;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            letter-spacing: 3px;
+
+            color: #a5b4fc;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+
+            letter-spacing: -1px;
+        }
+
+        .description {
+            color: rgba(255,255,255,0.6);
+
+            line-height: 1.7;
+
+            margin-bottom: 30px;
+        }
+
+        .email-box {
+            padding: 18px;
+
+            margin-bottom: 28px;
+
+            border-radius: 16px;
+
+            background: rgba(255,255,255,0.06);
+
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .email-label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 12px;
+
+            color: rgba(255,255,255,0.5);
+        }
+
+        .email {
+            font-size: 18px;
+            font-weight: 600;
+
+            color: white;
+
+            word-break: break-word;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            gap: 14px;
+        }
+
+        .button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+
+            min-height: 55px;
+
+            padding: 0 18px;
+
+            border-radius: 14px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            transition: 0.25s ease;
+
+            cursor: pointer;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+        }
+
+        .app-button {
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #8b5cf6
+                );
+
+            box-shadow:
+                0 12px 30px rgba(99,102,241,0.25);
+        }
+
+        .app-button:hover {
+            box-shadow:
+                0 18px 40px rgba(99,102,241,0.4);
+        }
+
+        .web-button {
+            color: white;
+
+            background: rgba(255,255,255,0.07);
+
+            border: 1px solid rgba(255,255,255,0.14);
+        }
+
+        .web-button:hover {
+            background: rgba(255,255,255,0.12);
+        }
+
+        .back {
+            display: inline-block;
+
+            margin-top: 28px;
+
+            color: rgba(255,255,255,0.5);
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            transition: 0.2s;
+        }
+
+        .back:hover {
+            color: white;
+        }
+
+        .note {
+            margin-top: 22px;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+
+            color: rgba(255,255,255,0.4);
+        }
+
+        @media (max-width: 550px) {
+
+            .container {
+                padding: 35px 22px;
+            }
+
+            h1 {
+                font-size: 34px;
+            }
+
+            .buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .email {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <div class="icon">
+            ✉️
+        </div>
+
+        <div class="label">
+            CONTACT
+        </div>
+
+        <h1>Liên hệ với tôi</h1>
+
+        <p class="description">
+            Bạn có thể liên hệ với tôi thông qua địa chỉ email cá nhân.
+            Hãy lựa chọn phương thức gửi phù hợp với thiết bị của bạn.
+        </p>
+
+        <div class="email-box">
+
+            <span class="email-label">
+                EMAIL CÁ NHÂN
+            </span>
+
+            <div class="email">
+                ndt03012007@gmail.com
+            </div>
+
+        </div>
+
+        <div class="buttons">
+
+            <!-- Mở ứng dụng Email mặc định -->
+            <a
+                href="mailto:ndt03012007@gmail.com?subject=Liên hệ từ website Đức Toàn"
+                class="button app-button"
+            >
+                📧
+                <span>Mở ứng dụng Email</span>
+            </a>
+
+
+            <!-- Mở Gmail trên trình duyệt -->
+            <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=ndt03012007@gmail.com&su=Liên hệ từ website Đức Toàn"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="button web-button"
+            >
+                🌐
+                <span>Gửi bằng Gmail Web</span>
+            </a>
+
+        </div>
+
+        <p class="note">
+            Ứng dụng Email sẽ sử dụng trình quản lý email mặc định
+            trên thiết bị của bạn. Gmail Web phù hợp khi bạn không
+            sử dụng ứng dụng email trên máy.
+        </p>
+
+        <a href="index.html" class="back">
+            ← Quay lại trang chủ
+        </a>
+
+    </main>
+
+</body>
+</html>
