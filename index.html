@@ -2,52 +2,937 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><ĐỨCTOÀN></title>
-    
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Portfolio cá nhân của Đức Toàn - Sinh viên Công nghệ Thông tin">
+
+    <title>Đức Toàn</title>
+
     <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
 </head>
+
 <body>
 
-    <div id="login-overlay">
-        <div class="login-box">
-            <h3>ĐĂNG NHẬP ĐỂ XEM QUÀ💕</h3>
-            <form id="login-form">
-                <div class="input-group">
-                    <label for="username">Tài khoản (ID):</label>
-                    <input type="text" id="username" placeholder="Nhập tài khoản..." required autocomplete="off">
-                </div>
-                <div class="input-group">
-                    <label for="password">Mật khẩu (Pass):</label>
-                    <input type="password" id="password" placeholder="Nhập mật khẩu số..." required pattern="[0-9]*" inputmode="numeric">
-                </div>
-                <button type="submit" class="login-btn">Đăng nhập</button>
-                <div id="login-error"></div>
-            </form>
+<!-- ================= HEADER ================= -->
+
+<header class="header" id="header">
+
+    <div class="container nav-container">
+
+        <a href="#home" class="logo">
+            <span class="logo-symbol">DT</span>
+            <span>Đức Toàn</span>
+        </a>
+
+        <nav class="navbar" id="navbar">
+
+            <a href="#home" class="nav-link active">
+                Trang chủ
+            </a>
+
+            <a href="#about" class="nav-link">
+                Giới thiệu
+            </a>
+
+            <a href="#skills" class="nav-link">
+                Kỹ năng
+            </a>
+
+            <a href="#projects" class="nav-link">
+                Dự án
+            </a>
+
+            <a href="#journey" class="nav-link">
+                Hành trình
+            </a>
+
+            <a href="#contact" class="nav-link">
+                Liên hệ
+            </a>
+
+        </nav>
+
+        <div class="header-actions">
+
+            <button class="theme-toggle"
+                    id="themeToggle"
+                    aria-label="Đổi giao diện">
+
+                <span id="themeIcon">☾</span>
+
+            </button>
+
+            <button class="menu-toggle"
+                    id="menuToggle"
+                    aria-label="Mở menu">
+
+                ☰
+
+            </button>
+
         </div>
+
     </div>
 
-    <audio id="bg-music" src="mussic.mp3" loop></audio>
+</header>
 
-<div id="text-container">
-    <h1 class="draggable" style="top: 15%; left: 20%;">Tình yêu</h1>
-    <h2 class="draggable" style="top: 30%; left: 30%;">LOVE</h2>
-    
 
-    <img src="bohoa.png" alt="Ảnh kỷ niệm 1" class="draggable" style="top: 50%; left: 15%;">
-    <img src="bonghong.png" alt="Ảnh kỷ niệm 2" class="draggable" style="top: 50%; left: 65%;">
-</div>
+<!-- ================= MAIN ================= -->
 
-    <script type="importmap">
-        {
-            "imports": {
-                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-            }
-        }
-    </script>
+<main>
 
-    <script type="module" src="main.js"></script>
-    
+
+<!-- ================= HERO ================= -->
+
+<section class="hero section" id="home">
+
+    <div class="hero-background"></div>
+
+    <div class="container hero-container">
+
+        <div class="hero-content reveal">
+
+            <p class="hero-greeting">
+                Xin chào, tôi là <span>👋</span>
+            </p>
+
+            <h1>
+                Đức <span>Toàn</span>
+            </h1>
+
+            <h2>
+                Sinh viên Công nghệ Thông tin
+            </h2>
+
+            <p class="hero-description">
+                Tôi là một sinh viên IT đang trên hành trình
+                học lập trình, phát triển web và khám phá trí tuệ nhân tạo.
+                Tôi thích xây dựng những sản phẩm thực tế
+                và không ngừng học hỏi điều mới.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#projects" class="btn btn-primary">
+                    Xem dự án của tôi
+                    <span>→</span>
+                </a>
+
+                <a href="#contact" class="btn btn-outline">
+                    Liên hệ với tôi
+                </a>
+
+            </div>
+
+            <div class="social-links">
+
+                <a href="https://github.com/DucToan-25"
+                   target="_blank"
+                   aria-label="GitHub">
+                    GH
+                </a>
+
+                <a href="#"
+                   aria-label="Facebook">
+                    f
+                </a>
+
+                <a href="#"
+                   aria-label="YouTube">
+                    ▶
+                </a>
+
+                <a href="mailto:ductoancontact@gmail.com"
+                   aria-label="Email">
+                    @
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- HERO IMAGE -->
+
+        <div class="hero-image reveal">
+
+            <div class="image-glow"></div>
+
+            <div class="portrait-card">
+
+                <!--
+                    THAY ẢNH:
+                    Đặt ảnh của bạn vào thư mục images
+                    và đặt tên là avatar.jpg
+                -->
+
+                <img src="images/avatar.jpg"
+                     alt="Ảnh đại diện Đức Toàn"
+                     onerror="this.style.display='none'; this.parentElement.classList.add('no-image');">
+
+                <div class="image-placeholder">
+                    <span>DT</span>
+                    <small>Đức Toàn</small>
+                </div>
+
+            </div>
+
+            <div class="floating-card floating-card-one">
+                <span>💻</span>
+                <div>
+                    <strong>IT Student</strong>
+                    <small>Learning & Building</small>
+                </div>
+            </div>
+
+            <div class="floating-card floating-card-two">
+                <span>🚀</span>
+                <div>
+                    <strong>Developer</strong>
+                    <small>Future Goal</small>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="section about" id="about">
+
+    <div class="container">
+
+        <div class="section-heading reveal">
+
+            <span class="section-number">01</span>
+
+            <div>
+                <p class="section-label">GIỚI THIỆU</p>
+                <h2>Về <span>Đức Toàn</span></h2>
+            </div>
+
+        </div>
+
+
+        <div class="about-grid">
+
+            <div class="about-image reveal">
+
+                <div class="about-photo">
+
+                    <img src="images/avatar.jpg"
+                         alt="Đức Toàn">
+
+                    <div class="about-photo-placeholder">
+                        DT
+                    </div>
+
+                </div>
+
+                <div class="experience-badge">
+
+                    <strong>IT</strong>
+
+                    <span>
+                        Student<br>
+                        Developer
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="about-content reveal">
+
+                <h3>
+                    Mình là <span>Đức Toàn</span>
+                </h3>
+
+                <p>
+                    Hiện tại mình là sinh viên ngành
+                    <strong>Công nghệ Thông tin</strong>
+                    tại Đại học Thủy Lợi.
+                </p>
+
+                <p>
+                    Mình yêu thích lập trình, công nghệ và
+                    việc tạo ra những sản phẩm có thể giải quyết
+                    những vấn đề thực tế.
+                </p>
+
+                <p>
+                    Hiện mình đang tập trung xây dựng nền tảng
+                    về lập trình, phát triển web và tìm hiểu
+                    sâu hơn về AI.
+                </p>
+
+
+                <div class="about-info">
+
+                    <div>
+                        <span>🎓</span>
+                        <div>
+                            <small>Trường</small>
+                            <strong>Đại học Thủy Lợi</strong>
+                        </div>
+                    </div>
+
+                    <div>
+                        <span>💻</span>
+                        <div>
+                            <small>Chuyên ngành</small>
+                            <strong>Công nghệ Thông tin</strong>
+                        </div>
+                    </div>
+
+                    <div>
+                        <span>📍</span>
+                        <div>
+                            <small>Khu vực</small>
+                            <strong>Việt Nam</strong>
+                        </div>
+                    </div>
+
+                    <div>
+                        <span>🚀</span>
+                        <div>
+                            <small>Định hướng</small>
+                            <strong>Web & AI</strong>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SKILLS ================= -->
+
+<section class="section skills" id="skills">
+
+    <div class="container">
+
+        <div class="section-heading reveal">
+
+            <span class="section-number">02</span>
+
+            <div>
+                <p class="section-label">KỸ NĂNG</p>
+                <h2>Những gì mình <span>đang học</span></h2>
+            </div>
+
+        </div>
+
+
+        <div class="skills-grid">
+
+
+            <div class="skill-card reveal">
+
+                <div class="skill-icon cpp">C++</div>
+
+                <div>
+                    <h3>C++</h3>
+                    <p>
+                        Lập trình cơ bản, OOP,
+                        cấu trúc dữ liệu và thuật toán.
+                    </p>
+                </div>
+
+                <div class="skill-level">
+                    <span style="width: 65%"></span>
+                </div>
+
+            </div>
+
+
+            <div class="skill-card reveal">
+
+                <div class="skill-icon java">☕</div>
+
+                <div>
+                    <h3>Java</h3>
+                    <p>
+                        Đang học Java và lập trình
+                        hướng đối tượng.
+                    </p>
+                </div>
+
+                <div class="skill-level">
+                    <span style="width: 45%"></span>
+                </div>
+
+            </div>
+
+
+            <div class="skill-card reveal">
+
+                <div class="skill-icon python">🐍</div>
+
+                <div>
+                    <h3>Python</h3>
+                    <p>
+                        Python cơ bản, xử lý dữ liệu
+                        và tìm hiểu AI.
+                    </p>
+                </div>
+
+                <div class="skill-level">
+                    <span style="width: 50%"></span>
+                </div>
+
+            </div>
+
+
+            <div class="skill-card reveal">
+
+                <div class="skill-icon html">HTML</div>
+
+                <div>
+                    <h3>HTML & CSS</h3>
+                    <p>
+                        Xây dựng giao diện website
+                        responsive.
+                    </p>
+                </div>
+
+                <div class="skill-level">
+                    <span style="width: 70%"></span>
+                </div>
+
+            </div>
+
+
+            <div class="skill-card reveal">
+
+                <div class="skill-icon js">JS</div>
+
+                <div>
+                    <h3>JavaScript</h3>
+                    <p>
+                        DOM, tương tác website,
+                        animation và API.
+                    </p>
+                </div>
+
+                <div class="skill-level">
+                    <span style="width: 55%"></span>
+                </div>
+
+            </div>
+
+
+            <div class="skill-card reveal">
+
+                <div class="skill-icon git">GH</div>
+
+                <div>
+                    <h3>Git & GitHub</h3>
+                    <p>
+                        Quản lý source code và
+                        triển khai website.
+                    </p>
+                </div>
+
+                <div class="skill-level">
+                    <span style="width: 65%"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PROJECTS ================= -->
+
+<section class="section projects" id="projects">
+
+    <div class="container">
+
+        <div class="section-heading reveal">
+
+            <span class="section-number">03</span>
+
+            <div>
+                <p class="section-label">DỰ ÁN</p>
+                <h2>Một số <span>dự án</span></h2>
+            </div>
+
+        </div>
+
+
+        <div class="projects-grid">
+
+
+            <!-- PROJECT 1 -->
+
+            <article class="project-card reveal">
+
+                <div class="project-image">
+
+                    <img src="images/project-weather.jpg"
+                         alt="AI Weather Forecast">
+
+                    <div class="project-overlay">
+                        <a href="#" class="project-link">
+                            Xem dự án →
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="project-content">
+
+                    <span class="project-category">
+                        AI / WEB
+                    </span>
+
+                    <h3>
+                        AI Weather Forecast
+                    </h3>
+
+                    <p>
+                        Website dự báo thời tiết sử dụng
+                        API và các tính năng AI.
+                    </p>
+
+                    <div class="tags">
+
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>API</span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 2 -->
+
+            <article class="project-card reveal">
+
+                <div class="project-image">
+
+                    <img src="images/project-ndt1.jpg"
+                         alt="Web học tập">
+
+                    <div class="project-overlay">
+                        <a href="#" class="project-link">
+                            Xem dự án →
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="project-content">
+
+                    <span class="project-category">
+                        EDUCATION
+                    </span>
+
+                    <h3>
+                        Web Học Tập
+                    </h3>
+
+                    <p>
+                        Nền tảng hỗ trợ học tập dành cho
+                        học sinh, sinh viên Việt Nam.
+                    </p>
+
+                    <div class="tags">
+
+                        <span>Java</span>
+                        <span>Python</span>
+                        <span>AI</span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 3 -->
+
+            <article class="project-card reveal">
+
+                <div class="project-image">
+
+                    <img src="images/project-ndt3.jpg"
+                         alt="Mental Health">
+
+                    <div class="project-overlay">
+                        <a href="#" class="project-link">
+                            Xem dự án →
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="project-content">
+
+                    <span class="project-category">
+                        AI / COMMUNITY
+                    </span>
+
+                    <h3>
+                        Mental Health & Soft Skills
+                    </h3>
+
+                    <p>
+                        Ý tưởng nền tảng hỗ trợ tinh thần,
+                        kỹ năng mềm và cộng đồng.
+                    </p>
+
+                    <div class="tags">
+
+                        <span>AI</span>
+                        <span>Python</span>
+                        <span>Community</span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 4 -->
+
+            <article class="project-card reveal">
+
+                <div class="project-image">
+
+                    <img src="images/project-shoes.jpg"
+                         alt="Website bán giày">
+
+                    <div class="project-overlay">
+                        <a href="#" class="project-link">
+                            Xem dự án →
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="project-content">
+
+                    <span class="project-category">
+                        FRONTEND
+                    </span>
+
+                    <h3>
+                        Website Bán Giày
+                    </h3>
+
+                    <p>
+                        Website bán giày được xây dựng
+                        để thực hành HTML, CSS và JavaScript.
+                    </p>
+
+                    <div class="tags">
+
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= JOURNEY ================= -->
+
+<section class="section journey" id="journey">
+
+    <div class="container">
+
+        <div class="section-heading reveal">
+
+            <span class="section-number">04</span>
+
+            <div>
+                <p class="section-label">HÀNH TRÌNH</p>
+                <h2>Hành trình <span>học tập</span></h2>
+            </div>
+
+        </div>
+
+
+        <div class="timeline">
+
+
+            <div class="timeline-item reveal">
+
+                <div class="timeline-dot">
+                    01
+                </div>
+
+                <div class="timeline-content">
+
+                    <span>2025</span>
+
+                    <h3>
+                        Bắt đầu học IT
+                    </h3>
+
+                    <p>
+                        Bắt đầu hành trình với ngành
+                        Công nghệ Thông tin tại Đại học Thủy Lợi.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item reveal">
+
+                <div class="timeline-dot">
+                    02
+                </div>
+
+                <div class="timeline-content">
+
+                    <span>Đang học</span>
+
+                    <h3>
+                        Xây dựng nền tảng lập trình
+                    </h3>
+
+                    <p>
+                        Học C++, Java, Python,
+                        HTML, CSS, JavaScript và Git.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item reveal">
+
+                <div class="timeline-dot">
+                    03
+                </div>
+
+                <div class="timeline-content">
+
+                    <span>Hiện tại</span>
+
+                    <h3>
+                        Xây dựng dự án cá nhân
+                    </h3>
+
+                    <p>
+                        Tạo các website và project nhỏ
+                        để biến kiến thức thành sản phẩm thực tế.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item reveal">
+
+                <div class="timeline-dot">
+                    04
+                </div>
+
+                <div class="timeline-content">
+
+                    <span>Tương lai</span>
+
+                    <h3>
+                        Trở thành Developer
+                    </h3>
+
+                    <p>
+                        Phát triển kỹ năng chuyên môn,
+                        xây dựng sản phẩm và làm việc trong ngành IT.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section class="section contact" id="contact">
+
+    <div class="container">
+
+        <div class="contact-box reveal">
+
+            <div class="contact-content">
+
+                <p class="section-label">
+                    LIÊN HỆ
+                </p>
+
+                <h2>
+                    Hãy cùng tạo ra
+                    <span>điều gì đó</span>
+                </h2>
+
+                <p>
+                    Nếu bạn muốn kết nối, trao đổi về công nghệ
+                    hoặc cùng xây dựng một dự án, hãy liên hệ với tôi.
+                </p>
+
+                <a href="mailto:ductoancontact@gmail.com"
+                   class="btn btn-primary">
+
+                    Gửi email
+                    <span>→</span>
+
+                </a>
+
+            </div>
+
+
+            <div class="contact-info">
+
+                <a href="mailto:ductoancontact@gmail.com"
+                   class="contact-item">
+
+                    <span class="contact-icon">
+                        @
+                    </span>
+
+                    <div>
+                        <small>Email</small>
+                        <strong>
+                            ductoancontact@gmail.com
+                        </strong>
+                    </div>
+
+                </a>
+
+
+                <a href="https://github.com/DucToan-25"
+                   target="_blank"
+                   class="contact-item">
+
+                    <span class="contact-icon">
+                        GH
+                    </span>
+
+                    <div>
+                        <small>GitHub</small>
+                        <strong>
+                            DucToan-25
+                        </strong>
+                    </div>
+
+                </a>
+
+
+                <div class="contact-item">
+
+                    <span class="contact-icon">
+                        📍
+                    </span>
+
+                    <div>
+                        <small>Khu vực</small>
+                        <strong>
+                            Việt Nam
+                        </strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="container footer-container">
+
+        <div class="footer-logo">
+            <span>DT</span>
+            <strong>Đức Toàn</strong>
+        </div>
+
+        <p>
+            © <span id="currentYear"></span>
+            Đức Toàn. All rights reserved.
+        </p>
+
+        <p class="footer-code">
+            Code today · Build tomorrow · Be better
+        </p>
+
+    </div>
+
+</footer>
+
+
+<!-- BACK TO TOP -->
+
+<button id="backToTop"
+        class="back-to-top"
+        aria-label="Lên đầu trang">
+
+    ↑
+
+</button>
+
+
+<script src="main.js"></script>
+
 </body>
 </html>

@@ -1,277 +1,380 @@
-import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+/* ==================================================
+   ĐỨC TOÀN PORTFOLIO
+   JAVASCRIPT
+================================================== */
 
-// ========================================================
-// 1. PHẦN XỬ LÝ ĐĂNG NHẬP (Lấy từ login.js)
-// ========================================================
-const loginForm = document.getElementById("login-form");
-const loginOverlay = document.getElementById("login-overlay");
-const errorMsg = document.getElementById("login-error");
 
-// CÀI ĐẶT TÀI KHOẢN VÀ MẬT KHẨU TẠI ĐÂY
-const CORRECT_ID = "123456";  
-const CORRECT_PASS = "123456";      
+/* ================= ELEMENTS ================= */
 
-if (loginForm) {
-    loginForm.addEventListener("submit", (e) => {
-        e.preventDefault();
+const body = document.body;
 
-        const usernameInput = document.getElementById("username").value.trim();
-        const passwordInput = document.getElementById("password").value.trim();
+const themeToggle =
+    document.getElementById("themeToggle");
 
-        if (usernameInput === CORRECT_ID && passwordInput === CORRECT_PASS) {
-            loginOverlay.style.opacity = "0";
-            
-            // Phát nhạc
-            const music = document.getElementById('bg-music');
-            if (music && music.paused) {
-                music.play().catch(err => console.log("Trình duyệt chặn phát nhạc:", err));
+const themeIcon =
+    document.getElementById("themeIcon");
+
+const menuToggle =
+    document.getElementById("menuToggle");
+
+const navbar =
+    document.getElementById("navbar");
+
+const navLinks =
+    document.querySelectorAll(".nav-link");
+
+const backToTop =
+    document.getElementById("backToTop");
+
+const revealElements =
+    document.querySelectorAll(".reveal");
+
+const currentYear =
+    document.getElementById("currentYear");
+
+
+/* ================= CURRENT YEAR ================= */
+
+if (currentYear) {
+
+    currentYear.textContent =
+        new Date().getFullYear();
+
+}
+
+
+/* ================= DARK / LIGHT MODE ================= */
+
+const savedTheme =
+    localStorage.getItem("theme");
+
+
+if (savedTheme === "light") {
+
+    body.classList.add("light");
+
+    themeIcon.textContent = "☀";
+
+} else {
+
+    themeIcon.textContent = "☾";
+
+}
+
+
+/* CHANGE THEME */
+
+themeToggle.addEventListener("click", () => {
+
+    body.classList.toggle("light");
+
+    const isLight =
+        body.classList.contains("light");
+
+
+    if (isLight) {
+
+        themeIcon.textContent = "☀";
+
+        localStorage.setItem(
+            "theme",
+            "light"
+        );
+
+    } else {
+
+        themeIcon.textContent = "☾";
+
+        localStorage.setItem(
+            "theme",
+            "dark"
+        );
+
+    }
+
+});
+
+
+/* ================= MOBILE MENU ================= */
+
+menuToggle.addEventListener("click", () => {
+
+    navbar.classList.toggle("open");
+
+});
+
+
+/* CLOSE MENU AFTER CLICK */
+
+navLinks.forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        navbar.classList.remove("open");
+
+    });
+
+});
+
+
+/* ================= ACTIVE NAVIGATION ================= */
+
+const sections =
+    document.querySelectorAll("section[id]");
+
+
+function updateActiveNav() {
+
+    const scrollPosition =
+        window.scrollY + 150;
+
+
+    sections.forEach(section => {
+
+        const sectionTop =
+            section.offsetTop;
+
+        const sectionHeight =
+            section.offsetHeight;
+
+        const sectionId =
+            section.getAttribute("id");
+
+
+        if (
+            scrollPosition >= sectionTop &&
+            scrollPosition <
+            sectionTop + sectionHeight
+        ) {
+
+            navLinks.forEach(link => {
+
+                link.classList.remove("active");
+
+            });
+
+
+            const activeLink =
+                document.querySelector(
+                    `.nav-link[href="#${sectionId}"]`
+                );
+
+
+            if (activeLink) {
+
+                activeLink.classList.add(
+                    "active"
+                );
+
             }
 
-            setTimeout(() => {
-                loginOverlay.remove();
-            }, 800);
-        } else {
-            errorMsg.innerText = "Tài khoản hoặc mật khẩu chưa chính xác rồi! 💕";
-            document.getElementById("password").value = "";
         }
-    });
-}
 
-// ========================================================
-// 2. PHẦN ĐỒ HỌA 3D TRÁI TIM (Lấy từ main.js gốc)
-// ========================================================
-
-/* BACKGROUND */
-document.body.style.background = 'radial-gradient(circle at center,#fff5fa 0%,#ffd1e6 35%,#ff69b4 100%)';
-
-/* SCENE */
-const scene = new THREE.Scene();
-
-/* CAMERA (Đã tinh chỉnh cho điện thoại) */
-const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-const isMobileInitial = window.innerWidth < 768;
-camera.position.set(0, 0, isMobileInitial ? 85 : 45);
-
-/* RENDERER */
-const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-document.body.appendChild(renderer.domElement);
-
-/* CONTROLS */
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.enableZoom = false;
-controls.autoRotate = true;
-controls.autoRotateSpeed = 1.2;
-
-/* LIGHTS */
-scene.add(new THREE.AmbientLight(0xffffff, 1.6));
-
-const mainLight = new THREE.DirectionalLight(0xffffff, 4);
-mainLight.position.set(10, 10, 20);
-scene.add(mainLight);
-
-const pinkLight = new THREE.PointLight(0xff66cc, 50, 120);
-pinkLight.position.set(0, 0, 15);
-scene.add(pinkLight);
-
-const sideLight = new THREE.PointLight(0xffffff, 15, 100);
-sideLight.position.set(-15, 10, 20);
-scene.add(sideLight);
-
-/* HEART SHAPE */
-const heartShape = new THREE.Shape();
-heartShape.moveTo(5,5);
-heartShape.bezierCurveTo(5,5, 4,0, 0,0);
-heartShape.bezierCurveTo(-6,0, -6,7, -6,7);
-heartShape.bezierCurveTo(-6,11, -3,15.4, 5,19);
-heartShape.bezierCurveTo(12,15.4, 16,11, 16,7);
-heartShape.bezierCurveTo(16,7, 16,0, 10,0);
-heartShape.bezierCurveTo(7,0, 5,5, 5,5);
-
-/* GEOMETRY */
-const geometry = new THREE.ExtrudeGeometry(heartShape, {
-    depth: 3,
-    bevelEnabled: true,
-    bevelSegments: 20,
-    steps: 2,
-    bevelSize: 2.5,
-    bevelThickness: 2.5
-});
-geometry.center();
-
-/* MATERIAL */
-const material = new THREE.MeshPhysicalMaterial({
-    color: 0xff2d95,
-    emissive: 0xff66cc,
-    emissiveIntensity: 0.45,
-    roughness: 0.01,
-    metalness: 0.1,
-    clearcoat: 1,
-    clearcoatRoughness: 0.02
-});
-
-const mainHeart = new THREE.Mesh(geometry, material);
-mainHeart.rotation.z = Math.PI;
-scene.add(mainHeart);
-
-/* FLOATING HEARTS */
-const bgGroup = new THREE.Group();
-
-for(let i = 0; i < 30; i++){
-    const heart = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({
-        color: 0xff99cc,
-        transparent: true,
-        opacity: 0.45
-    }));
-    heart.position.set((Math.random()-0.5)*120, (Math.random()-0.5)*80, -10 - Math.random()*50);
-    heart.scale.setScalar(0.08 + Math.random()*0.18);
-    heart.rotation.z = Math.PI;
-    heart.rotation.x = Math.random()*0.5;
-    heart.rotation.y = Math.random()*0.5;
-    bgGroup.add(heart);
-}
-
-for(let i = 0; i < 30; i++){
-    const heart = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({
-        color: 0xff99cc,
-        transparent: true,
-        opacity: 0.45
-    }));
-    heart.position.set((Math.random()-0.5)*120, (Math.random()-0.5)*80, 10 + Math.random()*30);
-    heart.scale.setScalar(0.08 + Math.random()*0.18);
-    heart.rotation.z = Math.PI;
-    heart.rotation.x = Math.random()*0.5;
-    heart.rotation.y = Math.random()*0.5;
-    bgGroup.add(heart);
-}
-scene.add(bgGroup);
-
-/* STARS */
-const particleCount = 5000;
-const particleGeo = new THREE.BufferGeometry();
-const positions = new Float32Array(particleCount * 3);
-
-for(let i=0;i<particleCount;i++){
-    positions[i*3] = (Math.random()-0.5)*200;
-    positions[i*3+1] = (Math.random()-0.5)*200;
-    positions[i*3+2] = (Math.random()-0.5)*200;
-}
-
-particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-const particleMat = new THREE.PointsMaterial({
-    color: 0xffffff,
-    size: 0.25,
-    transparent: true,
-    opacity: 0.9
-});
-
-const particles = new THREE.Points(particleGeo, particleMat);
-scene.add(particles);
-
-/* TEXT */
-window.addEventListener('load',()=>{
-    const text = document.getElementById('text-container');
-    if(text){
-        text.classList.add('show-text');
-    }
-});
-
-/* ANIMATION */
-const clock = new THREE.Clock();
-
-function animate(){
-    requestAnimationFrame(animate);
-    const t = clock.getElapsedTime();
-
-    /* HEART BEAT */
-    const beat = 1 + Math.sin(t*4)*0.06 + Math.sin(t*8)*0.025;
-    mainHeart.scale.set(beat, beat, beat);
-    mainHeart.rotation.y = Math.sin(t*0.7)*0.25;
-    mainHeart.rotation.x = Math.sin(t*0.4)*0.05;
-
-    /* FLOATING HEARTS */
-    bgGroup.children.forEach((heart,index)=>{
-        heart.position.y += Math.sin(t*1.5 + index)*0.015;
-        heart.rotation.y += 0.002;
-        heart.rotation.x += 0.001;
     });
 
-    /* STARS */
-    particles.rotation.y += 0.0006;
-    particles.rotation.x += 0.0002;
-
-    controls.update();
-    renderer.render(scene, camera);
 }
-animate();
 
-/* RESIZE (Đã cập nhật tỷ lệ camera cho xoay ngang dọc) */
-window.addEventListener('resize', ()=>{
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
 
-    const isMobileResize = window.innerWidth < 768;
-    camera.position.z = isMobileResize ? 85 : 45;
+window.addEventListener(
+    "scroll",
+    updateActiveNav
+);
+
+
+/* ================= SCROLL REVEAL ================= */
+
+const observer =
+    new IntersectionObserver(
+        (entries) => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add(
+                        "visible"
+                    );
+
+                    observer.unobserve(
+                        entry.target
+                    );
+
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.12
+        }
+    );
+
+
+revealElements.forEach(element => {
+
+    observer.observe(element);
+
 });
 
-// ========================================================
-// 3. CHỨC NĂNG KÉO THẢ TỰ DO (Thêm vào cuối main.js)
-// ========================================================
-function makeDraggable(element) {
-    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
 
-    element.onmousedown = dragMouseDown;
-    element.ontouchstart = dragTouchStart;
+/* ================= BACK TO TOP ================= */
 
-    function dragMouseDown(e) {
-        e.preventDefault();
-        e.stopPropagation(); // Ngăn xoay 3D
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        document.onmouseup = closeDragElement;
-        document.onmousemove = elementDrag;
+window.addEventListener(
+    "scroll",
+    () => {
+
+        if (window.scrollY > 500) {
+
+            backToTop.classList.add(
+                "show"
+            );
+
+        } else {
+
+            backToTop.classList.remove(
+                "show"
+            );
+
+        }
+
     }
+);
 
-    function elementDrag(e) {
-        e.preventDefault();
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        element.style.top = (element.offsetTop - pos2) + "px";
-        element.style.left = (element.offsetLeft - pos1) + "px";
+
+backToTop.addEventListener(
+    "click",
+    () => {
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
+
     }
+);
 
-    // Xử lý kéo thả trên màn hình cảm ứng
-    function dragTouchStart(e) {
-        e.stopPropagation(); // Ngăn xoay 3D
-        pos3 = e.touches[0].clientX;
-        pos4 = e.touches[0].clientY;
-        document.ontouchend = closeDragElement;
-        document.ontouchmove = elementTouchDrag;
+
+/* ================= CLOSE MENU WHEN CLICK OUTSIDE ================= */
+
+document.addEventListener(
+    "click",
+    (event) => {
+
+        const clickedInsideMenu =
+            navbar.contains(event.target);
+
+        const clickedMenuButton =
+            menuToggle.contains(event.target);
+
+
+        if (
+            !clickedInsideMenu &&
+            !clickedMenuButton
+        ) {
+
+            navbar.classList.remove(
+                "open"
+            );
+
+        }
+
     }
+);
 
-    function elementTouchDrag(e) {
-        pos1 = pos3 - e.touches[0].clientX;
-        pos2 = pos4 - e.touches[0].clientY;
-        pos3 = e.touches[0].clientX;
-        pos4 = e.touches[0].clientY;
-        element.style.top = (element.offsetTop - pos2) + "px";
-        element.style.left = (element.offsetLeft - pos1) + "px";
-    }
 
-    function closeDragElement() {
-        document.onmouseup = null;
-        document.onmousemove = null;
-        document.ontouchend = null;
-        document.ontouchmove = null;
-    }
-}
+/* ================= IMAGE FALLBACK ================= */
 
-// Kích hoạt tính năng cho tất cả các phần tử có class 'draggable'
-document.querySelectorAll('.draggable').forEach(makeDraggable);
+/*
+    Nếu chưa có avatar.jpg,
+    website sẽ hiển thị chữ DT.
+*/
+
+document
+    .querySelectorAll("img")
+    .forEach(img => {
+
+        img.addEventListener(
+            "error",
+            () => {
+
+                img.style.display =
+                    "none";
+
+            }
+        );
+
+    });
+
+
+/* ================= SMOOTH LINK ================= */
+
+document
+    .querySelectorAll('a[href^="#"]')
+    .forEach(link => {
+
+        link.addEventListener(
+            "click",
+            function (event) {
+
+                const targetId =
+                    this.getAttribute("href");
+
+                if (
+                    !targetId ||
+                    targetId === "#"
+                ) {
+                    return;
+                }
+
+
+                const target =
+                    document.querySelector(
+                        targetId
+                    );
+
+
+                if (target) {
+
+                    event.preventDefault();
+
+
+                    const headerHeight =
+                        document
+                            .getElementById("header")
+                            .offsetHeight;
+
+
+                    const targetPosition =
+                        target.offsetTop -
+                        headerHeight;
+
+
+                    window.scrollTo({
+
+                        top: targetPosition,
+
+                        behavior: "smooth"
+
+                    });
+
+                }
+
+            }
+        );
+
+    });
+
+
+/* ================= CONSOLE ================= */
+
+console.log(
+    "%cĐức Toàn Portfolio",
+    "font-size: 20px; font-weight: bold;"
+);
+
+console.log(
+    "Welcome to my portfolio 🚀"
+);
