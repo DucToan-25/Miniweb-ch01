@@ -2287,8 +2287,7 @@ body.light .header {
     justify-content: center;
 
     padding: 40px 20px;
-
-    background-image: url("project-nen.jpg");
+    background-image: url("image/project-nen.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
